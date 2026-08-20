@@ -1,0 +1,135 @@
+---
+// Stats — 実績ハイライト（組版・カウントアップ）
+const stats = [
+  { value: 47, suffix: "件", label: "公開済みのプロジェクト", en: "Projects" },
+  { value: 7, suffix: "年", label: "創業からの年数", en: "Since 2018" },
+  { value: 9, suffix: "割", label: "継続して頼まれた割合", en: "Repeat Clients" },
+  { value: 2, suffix: "日", label: "初回提案までの日数", en: "To Proposal" },
+];
+---
+
+<section class="section section--bordered stats">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-head__no">§ 04 — Track Record</span>
+      <div class="section-head__body">
+        <h2 class="section-title">数字で見る、これまでの歩み。</h2>
+      </div>
+    </div>
+
+    <div class="stats-grid">
+      {
+        stats.map((s, i) => (
+          <div class="stat reveal" data-delay={(i % 2) + 1}>
+            <div class="stat__value">
+              <span class="stat__num" data-target={s.value}>0</span>
+              <span class="stat__suffix">{s.suffix}</span>
+            </div>
+            <div class="stat__labels">
+              <span class="stat__label">{s.label}</span>
+              <span class="stat__en eyebrow">{s.en}</span>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+
+  .stat {
+    padding: clamp(36px, 4vw, 56px) clamp(20px, 2.5vw, 32px);
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat__value {
+    display: flex;
+    align-items: baseline;
+    gap: 2px;
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .stat__num {
+    font-size: clamp(2.8rem, 6vw, 4.5rem);
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  .stat__suffix {
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    color: var(--indigo);
+    font-style: italic;
+  }
+
+  .stat__labels {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .stat__label {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    letter-spacing: 0.04em;
+  }
+  .stat__en {
+    color: var(--ink-4);
+  }
+
+  @media (max-width: 880px) {
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  const nums = document.querySelectorAll<HTMLElement>(".stat__num");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const animateCount = (el: HTMLElement) => {
+    const target = parseInt(el.dataset.target || "0", 10);
+    if (reduceMotion) {
+      el.textContent = String(target);
+      return;
+    }
+    const duration = 1600;
+    const start = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress);
+      el.textContent = String(Math.floor(eased * target));
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = String(target);
+    };
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCount(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+  nums.forEach((n) => observer.observe(n));
+</script>

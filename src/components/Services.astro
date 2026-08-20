@@ -1,0 +1,161 @@
+---
+// Services — 番号付きリスト形式（エディトリアル）
+// カードのグリッドではなく、罫線で区切られた「目録」のような並び。
+const services = [
+  {
+    no: "01",
+    title: "Webサイト制作",
+    en: "Web Development",
+    desc: "コーポレートサイト、ランディングページ、ECサイトまで。ブランドの本質を言語化し、それを画面の上に配置する。Astro・Next.js による静的配信で Lighthouse 90 点台を実現し、編集者が自分で更新できる CMS まで併せて納品します。",
+    tags: ["コーポレート", "LP", "EC", "CMS", "高速化"],
+  },
+  {
+    no: "02",
+    title: "アプリ開発",
+    en: "App Engineering",
+    desc: "iOS / Android ネイティブと、React Native によるクロスプラットフォーム。要件定義から設計、実装、App Store / Google Play の審査対応まで一貫して担います。これまで平均 2 週間で両ストアの審査を通過しています。",
+    tags: ["iOS / Android", "React Native", "PWA", "ストア申請"],
+  },
+  {
+    no: "03",
+    title: "AI・業務自動化",
+    en: "AI & Automation",
+    desc: "窓口対応チャットボット、業務データ分析、定型作業の RPA。誤回答を防ぐため検索と生成の境界を分けた設計を基本とし、監査ログを含めて長く運用できる仕組みを納品します。",
+    tags: ["RAG", "チャットボット", "データ分析", "RPA"],
+  },
+];
+---
+
+<section class="section section--bordered" id="services">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-head__no">§ 01 — Services</span>
+      <div class="section-head__body">
+        <h2 class="section-title">三つの領域で、ひとつの伴走を。</h2>
+        <p class="section-subtitle">
+          企画・設計から開発、運用まで。Web・アプリ・AI の三本柱で、アイデアを確かなプロダクトとして形にします。
+        </p>
+      </div>
+    </div>
+
+    <ol class="services-list">
+      {
+        services.map((s, i) => (
+          <li class={`service reveal`} data-delay={(i % 2) + 1}>
+            <div class="service__head">
+              <span class="service__no mono">{s.no}</span>
+              <div class="service__titles">
+                <h3 class="service__title">{s.title}</h3>
+                <span class="service__en eyebrow">{s.en}</span>
+              </div>
+            </div>
+
+            <div class="service__body">
+              <p class="service__desc">{s.desc}</p>
+              <ul class="service__tags">
+                {s.tags.map((t) => <li>{t}</li>)}
+              </ul>
+              <a href="#contact" class="text-link service__link">
+                相談する
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .services-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .service {
+    display: grid;
+    grid-template-columns: 80px 280px 1fr;
+    gap: clamp(24px, 4vw, 48px);
+    padding: clamp(36px, 5vw, 56px) 0;
+    border-bottom: 1px solid var(--line);
+    align-items: start;
+    transition: background 0.4s var(--ease);
+  }
+  .service:hover {
+    background: var(--paper-soft);
+  }
+
+  .service__no {
+    font-size: 0.88rem;
+    color: var(--ink-4);
+    letter-spacing: 0.1em;
+    padding-top: 0.5em;
+    transition: color 0.4s var(--ease);
+  }
+  .service:hover .service__no {
+    color: var(--ink);
+  }
+
+  .service__titles {
+    padding-top: 0.2em;
+  }
+  .service__title {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+  .service__en {
+    color: var(--ink-3);
+  }
+
+  .service__body {
+    padding-top: 0.4em;
+  }
+  .service__desc {
+    color: var(--ink-2);
+    line-height: 1.95;
+    letter-spacing: 0.04em;
+    margin-bottom: 24px;
+  }
+
+  .service__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 24px;
+  }
+  .service__tags li {
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+    padding: 0 14px;
+    border-right: 1px solid var(--line);
+  }
+  .service__tags li:first-child {
+    padding-left: 0;
+  }
+  .service__tags li:last-child {
+    border-right: none;
+  }
+
+  .service__link {
+    color: var(--ink);
+  }
+
+  @media (max-width: 880px) {
+    .service {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .service__no {
+      padding-top: 0;
+    }
+    .service__titles {
+      padding-top: 0;
+    }
+  }
+</style>

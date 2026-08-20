@@ -1,0 +1,227 @@
+---
+// Hero — エディトリアル宇宙観
+// 大きな明朝のキャッチ、縦書きのサイン、罫線、余白で構成。
+// 比喩を抑え、人間味のある言葉で事業内容を伝える。
+---
+
+<section class="hero" id="top">
+  <div class="container hero__grid">
+    <!-- 左：メインキャッチ -->
+    <div class="hero__main">
+      <p class="eyebrow hero__index reveal">
+        <span class="hero__index-no">N° 01</span>
+        <span class="hero__index-sep">—</span>
+        <span>System Development Studio, Tokyo</span>
+      </p>
+
+      <h1 class="hero__title reveal" data-delay="1">
+        <span class="hero__title-line">アイデアを、</span>
+        <span class="hero__title-line hero__title-line--accent">かたちに、</span>
+        <span class="hero__title-line">事業の糧に。</span>
+      </h1>
+
+      <p class="hero__lead reveal" data-delay="2">
+        Web サイト・アプリ・AI。企画から設計、開発、運用までを一つのスタジオで引き受けます。
+        発注と受注の境をなくし、チームの一員として、
+        あなたの事業を確かなプロダクトへ育てます。
+      </p>
+
+      <div class="hero__actions reveal" data-delay="3">
+        <a href="#contact" class="btn btn-primary">
+          相談してみる
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#works" class="text-link">
+          実績を見る
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7v10H7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 右：サイン／メタ情報 -->
+    <aside class="hero__side reveal" data-delay="2">
+      <div class="hero__side-block">
+        <p class="eyebrow">Since</p>
+        <p class="hero__side-value">2018 — Tokyo</p>
+      </div>
+      <div class="hero__side-block">
+        <p class="eyebrow">Field</p>
+        <p class="hero__side-value">Web / App / AI</p>
+      </div>
+      <div class="hero__side-block">
+        <p class="eyebrow">Approach</p>
+        <p class="hero__motto">
+          発注と受注の境をなくし、<br />
+          チームの一員として伴走する。
+        </p>
+      </div>
+    </aside>
+  </div>
+
+  <!-- 下部：メタバー -->
+  <div class="container">
+    <div class="hero__bar reveal" data-delay="3">
+      <span>初回相談 無料</span>
+      <span class="hero__bar-sep">／</span>
+      <span>2 営業日以内にご提案</span>
+      <span class="hero__bar-sep">／</span>
+      <span>保守・運用までフルサポート</span>
+      <span class="hero__bar-sep hero__bar-sep--end">／</span>
+      <span class="hero__bar-scroll">Scroll</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(120px, 18vh, 180px);
+    padding-bottom: 0;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hero__grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: clamp(32px, 5vw, 64px);
+    align-items: start;
+    padding-top: clamp(40px, 6vw, 80px);
+  }
+
+  /* 左：メイン */
+  .hero__index {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: clamp(36px, 5vw, 56px);
+  }
+  .hero__index-no {
+    font-weight: 500;
+  }
+  .hero__index-sep {
+    color: var(--ink-4);
+  }
+
+  .hero__title {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 8.5vw, 6.5rem);
+    line-height: 1.18;
+    letter-spacing: 0.04em;
+    margin-bottom: clamp(32px, 4vw, 48px);
+  }
+  .hero__title-line {
+    display: block;
+  }
+  .hero__title-line--accent {
+    color: var(--indigo);
+    font-style: italic;
+    font-weight: 600;
+  }
+
+  .hero__lead {
+    font-size: clamp(0.98rem, 1.4vw, 1.12rem);
+    line-height: 2;
+    color: var(--ink-2);
+    letter-spacing: 0.05em;
+    max-width: 540px;
+    margin-bottom: clamp(36px, 4vw, 48px);
+  }
+
+  .hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  /* 右：サイドメタ */
+  .hero__side {
+    border-left: 1px solid var(--line);
+    padding-left: clamp(20px, 2vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .hero__side-block .eyebrow {
+    margin-bottom: 8px;
+  }
+  .hero__side-value {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+  }
+  .hero__motto {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--ink-2);
+    font-style: italic;
+  }
+
+  /* 下部メタバー */
+  .hero__bar {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--sans);
+    font-size: 0.82rem;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+  .hero__bar-sep {
+    color: var(--ink-4);
+  }
+  .hero__bar-sep--end {
+    margin-left: auto;
+  }
+  .hero__bar-scroll {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+    position: relative;
+    padding-right: 24px;
+  }
+  .hero__bar-scroll::after {
+    content: "↓";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    animation: scrollHint 2s var(--ease) infinite;
+  }
+  @keyframes scrollHint {
+    0%, 100% { transform: translateY(-50%); opacity: 1; }
+    50% { transform: translateY(20%); opacity: 0.4; }
+  }
+
+  @media (max-width: 880px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+    }
+    .hero__side {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      padding-left: 0;
+      padding-top: 32px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 24px 48px;
+    }
+    .hero__bar-sep--end { margin-left: 0; }
+  }
+
+  @media (max-width: 560px) {
+    .hero__actions { gap: 20px; }
+  }
+</style>

@@ -1,0 +1,168 @@
+---
+// About — スタジオの紹介
+//
+// Placeholder だった "Since 2018" を、実のある物語と事実で埋める。
+// 設立経緯・所在地・チーム体制・技術スタックを具体的に並べる。
+// ※以下は架空のコンセプト設定。
+const stack = [
+  "TypeScript", "Astro", "Next.js", "React", "React Native",
+  "Node.js", "Go", "PostgreSQL", "Stripe", "AWS",
+];
+
+const facts = [
+  { label: "設立", value: "2018年" },
+  { label: "拠点", value: "東京 中目黒" },
+  { label: "体制", value: "5名 / リモート可" },
+  { label: "対応時間", value: "平日 10:00–19:00" },
+];
+---
+
+<section class="section section--bordered about" id="about">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-head__no">§ 05 — Studio</span>
+      <div class="section-head__body">
+        <h2 class="section-title">小さく、長く、技術を磨き続ける。</h2>
+      </div>
+    </div>
+
+    <div class="about__grid">
+      <!-- 左：本文 -->
+      <div class="about__body reveal" data-delay="1">
+        <p class="about__lead">
+          COSMIC STUDIO は、2018年に中目黒で生まれた小さな開発スタジオです。
+          はじまりは、代表が前職で携わった自治体のシステム刷新を機に——
+          「速く、正しく、使い続けられるもの」を作るには、発注と受注の境をなくすしかない、と思ったことでした。
+        </p>
+        <p class="about__text">
+          以来、Web・アプリ・AI の三本柱で、企画の段階から一緒に悩み、設計し、開発し、運用までを伴走しています。
+          売上よりも、お客様が「また頼みたい」と思える体験を、何よりも優先してきました。
+          大規模な案件より、誠実に付き合える中規模の案件を得意としています。
+        </p>
+
+        <div class="about__stack">
+          <p class="eyebrow about__stack-label">Technology Stack</p>
+          <ul class="taglist about__stack-list">
+            {stack.map((s) => <li>{s}</li>)}
+          </ul>
+        </div>
+      </div>
+
+      <!-- 右：事実（カード） -->
+      <aside class="about__facts reveal" data-delay="2">
+        <dl class="about__facts-list">
+          {
+            facts.map((f) => (
+              <div class="about__fact">
+                <dt class="eyebrow">{f.label}</dt>
+                <dd class="about__fact-value">{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+
+        <figure class="about__sign">
+          <blockquote>
+            画一的なものはつくらない。<br />
+            その事業に必要なものだけを、確実に。
+          </blockquote>
+          <figcaption>
+            <span class="about__sign-name">— 代表</span>
+            <span class="about__sign-role eyebrow">Representative</span>
+          </figcaption>
+        </figure>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about__grid {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: clamp(32px, 5vw, 80px);
+    align-items: start;
+    border-top: 1px solid var(--line);
+    padding-top: clamp(40px, 5vw, 64px);
+  }
+
+  /* 本文 */
+  .about__lead {
+    font-family: var(--serif);
+    font-size: clamp(1.05rem, 1.6vw, 1.3rem);
+    line-height: 1.95;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .about__text {
+    font-size: 0.98rem;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    margin-bottom: 40px;
+  }
+
+  .about__stack-label {
+    display: block;
+    margin-bottom: 18px;
+  }
+
+  /* 事実カード */
+  .about__facts-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .about__fact {
+    padding: 24px;
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .about__fact .eyebrow {
+    display: block;
+    margin-bottom: 8px;
+  }
+  .about__fact-value {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    color: var(--ink);
+    letter-spacing: 0.04em;
+    line-height: 1.5;
+  }
+
+  /* 代表の言葉 */
+  .about__sign {
+    margin-top: 32px;
+    padding: 28px 0 0;
+    border-top: 1px solid var(--line);
+  }
+  .about__sign blockquote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    color: var(--ink-2);
+    margin-bottom: 16px;
+  }
+  .about__sign figcaption {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .about__sign-name {
+    font-family: var(--serif);
+    font-size: 0.94rem;
+    color: var(--ink);
+  }
+
+  @media (max-width: 880px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+  }
+</style>

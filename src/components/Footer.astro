@@ -1,0 +1,134 @@
+---
+// Footer
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <a href="#top" class="footer__logo">
+          <span class="footer__logo-mark">✦</span>
+          COSMIC STUDIO
+        </a>
+        <p class="footer__tagline">
+          アイデアを、かたちに、事業の糧に。<br />
+          Web・アプリ・AI のシステム開発スタジオ。
+        </p>
+      </div>
+
+      <nav class="footer__nav" aria-label="フッターナビゲーション">
+        <div class="footer__col">
+          <p class="eyebrow">Services</p>
+          <ul>
+            <li><a href="#services">Webサイト制作</a></li>
+            <li><a href="#services">アプリ開発</a></li>
+            <li><a href="#services">AI・業務自動化</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <p class="eyebrow">Studio</p>
+          <ul>
+            <li><a href="#works">実績</a></li>
+            <li><a href="#features">選ばれる理由</a></li>
+            <li><a href="#about">スタジオについて</a></li>
+            <li><a href="#contact">お問い合わせ</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">© {year} COSMIC STUDIO. All rights reserved.</p>
+      <p class="footer__sign">Crafted in Tokyo, since 2018 ✦</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    padding-top: clamp(56px, 8vw, 96px);
+  }
+
+  .footer__top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 48px;
+    justify-content: space-between;
+    padding-bottom: 56px;
+  }
+
+  .footer__brand {
+    max-width: 340px;
+  }
+
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .footer__logo-mark {
+    color: var(--indigo);
+    font-size: 1.1rem;
+  }
+
+  .footer__tagline {
+    color: var(--ink-2);
+    font-size: 0.92rem;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+  }
+
+  .footer__nav {
+    display: flex;
+    gap: 72px;
+  }
+  .footer__col .eyebrow {
+    display: block;
+    margin-bottom: 16px;
+  }
+  .footer__col li {
+    margin-bottom: 10px;
+  }
+  .footer__col a {
+    color: var(--ink-2);
+    font-size: 0.94rem;
+    letter-spacing: 0.04em;
+    transition: color 0.3s;
+  }
+  .footer__col a:hover {
+    color: var(--ink);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 32px;
+    border-top: 1px solid var(--line-soft);
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    color: var(--ink-3);
+    letter-spacing: 0.06em;
+  }
+  .footer__sign {
+    font-family: var(--serif);
+    font-style: italic;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 640px) {
+    .footer__top { flex-direction: column; }
+    .footer__nav { gap: 48px; }
+  }
+</style>

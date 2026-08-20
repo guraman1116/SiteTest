@@ -1,0 +1,21 @@
+---
+// ProgressBar — 最上部のスクロール進捗バー
+// 標準API(scroll)のみで動作。1pxのインク線が読書のしおりのように進む。
+---
+
+<div class="scroll-progress" id="scroll-progress" aria-hidden="true"></div>
+
+<script>
+  const bar = document.getElementById("scroll-progress");
+  if (bar) {
+    const update = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const ratio = max > 0 ? doc.scrollTop / max : 0;
+      bar.style.transform = `scaleX(${Math.min(ratio, 1)})`;
+    };
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update, { passive: true });
+    update();
+  }
+</script>

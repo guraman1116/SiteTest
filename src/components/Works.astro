@@ -1,0 +1,272 @@
+---
+// Works — 選定実績（エディトリアル目録）
+//
+// 「AI生成感」の最大原因である中身の薄さを解消する最重要セクション。
+// 業種・規模・技術・成果指標を伴う、ありそうで深い架空プロジェクトを並べる。
+// ※内容は架空のコンセプト。後で実データに差し替えやすい配列構造。
+type Work = {
+  no: string;
+  client: string;
+  title: string;
+  category: string;
+  year: string;
+  role: string;
+  desc: string;
+  tags: string[];
+  metric: { value: string; label: string };
+};
+
+const works: Work[] = [
+  {
+    no: "01",
+    client: "KAGUYA",
+    title: "化粧品ブランドの EC 全面刷新",
+    category: "Web Development",
+    year: "2025",
+    role: "企画・設計・実装・運用",
+    desc: "創業40年の化粧品メーカーが直販へ移行する機に、ブランドの物語を残したまま購買導線を再設計。SPA による高速な商品体験と、定期購入の離脱を抑える管理画面を併せて構築した。",
+    tags: ["Next.js", "Stripe", "MicroCMS", "Lighthouse 98"],
+    metric: { value: "3.4倍", label: "購買転換率" },
+  },
+  {
+    no: "02",
+    client: "orbit",
+    title: "自治体の窓口を担う AI チャットボット",
+    category: "AI & Automation",
+    year: "2024",
+    role: "要件定義・開発・精度改善",
+    desc: "人口3万人規模の自治体から、窓口へ寄せられる同じ問い合わせを半減したいという相談。届出様式ごとに回答を整理する RAG を組まず、検索と生成の境界を分離して hallucination を抑える構成を採用した。",
+    tags: ["TypeScript", "Vector DB", "RAG", "監査ログ"],
+    metric: { value: "-52%", label: "窓口問合せ数" },
+  },
+  {
+    no: "03",
+    client: "星屑書店",
+    title: "朗読を聴く、読書アプリ",
+    category: "App Engineering",
+    year: "2024",
+    role: "設計・実装・ストア申請",
+    desc: "声優事務所が立ち上げた朗読配信サービスの iOS / Android アプリ。章の終わりで次話へ自動接続する聴き浸り設計と、耳だけで追える操作性を両立させた。2週間で両ストアの審査を通過している。",
+    tags: ["React Native", "Expo", "ExoPlayer", "CARF"],
+    metric: { value: "4.8", label: "ストア評価" },
+  },
+  {
+    no: "04",
+    client: "tsuki & co.",
+    title: "建築事務所のポートフォリオ刷新",
+    category: "Web Development",
+    year: "2023",
+    role: "設計・実装・CMS 構築",
+    desc: "実績の写真を主役に据えたいという建築事務所の依頼。画像の重さを残しつつ PageSpeed で95点を超える静的サイトを構築し、編集者が案件を追加できる軽量な CMS を合わせて納入した。",
+    tags: ["Astro", "Sanity", "画像最適化", "静的配信"],
+    metric: { value: "0.8s", label: "LCP" },
+  },
+];
+---
+
+<section class="section section--bordered works" id="works">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="section-head__no">§ 02 — Selected Works</span>
+      <div class="section-head__body">
+        <h2 class="section-title">選んだ、つくった、残した。</h2>
+        <p class="section-subtitle">
+          相談から始まり、設計・実装・運用までを一貫して担った案件の抜粋です。
+          公開可能な範囲で、成果の数字とともに掲載しています。
+        </p>
+      </div>
+    </div>
+
+    <ol class="works-list" role="list">
+      {
+        works.map((w, i) => (
+          <li class="work reveal" data-delay={(i % 2) + 1}>
+            <div class="work__row">
+              <div class="work__index">
+                <span class="work__no mono">{w.no}</span>
+                <span class="work__year mono">{w.year}</span>
+              </div>
+
+              <div class="work__main">
+                <div class="work__head">
+                  <span class="work__client">{w.client}</span>
+                  <span class="work__cat eyebrow">{w.category}</span>
+                </div>
+                <h3 class="work__title hover-line">{w.title}</h3>
+                <p class="work__desc">{w.desc}</p>
+                <ul class="work__tags taglist" aria-label="使用技術">
+                  {w.tags.map((t) => <li>{t}</li>)}
+                </ul>
+              </div>
+
+              <div class="work__metric">
+                <span class="work__metric-value">{w.metric.value}</span>
+                <span class="work__metric-label eyebrow">{w.metric.label}</span>
+              </div>
+            </div>
+
+            <dl class="work__meta">
+              <div class="work__meta-item">
+                <dt class="eyebrow">Role</dt>
+                <dd>{w.role}</dd>
+              </div>
+              <div class="work__meta-item work__meta-item--link">
+                <a href="#contact" class="text-link">
+                  この案件に似た相談をする
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10M17 7v10H7"/></svg>
+                </a>
+              </div>
+            </dl>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .works-list {
+    border-top: 1px solid var(--line);
+  }
+
+  .work {
+    padding: clamp(36px, 5vw, 64px) 0;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.5s var(--ease);
+  }
+  .work:hover {
+    background: var(--paper-soft);
+  }
+
+  .work__row {
+    display: grid;
+    grid-template-columns: 90px 1fr 160px;
+    gap: clamp(24px, 4vw, 56px);
+    align-items: start;
+  }
+
+  /* 番号・年 */
+  .work__index {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 0.6em;
+  }
+  .work__no {
+    font-size: 0.92rem;
+    color: var(--ink);
+    letter-spacing: 0.1em;
+  }
+  .work__year {
+    font-size: 0.74rem;
+    color: var(--ink-4);
+    letter-spacing: 0.08em;
+  }
+
+  /* メイン */
+  .work__head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 14px;
+  }
+  .work__client {
+    font-family: var(--mono);
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    color: var(--ink-3);
+  }
+  .work__title {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.6vw, 2.05rem);
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    margin-bottom: 18px;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .work__desc {
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    line-height: 1.95;
+    letter-spacing: 0.04em;
+    max-width: 620px;
+    margin-bottom: 22px;
+  }
+
+  /* 成果指標（右列） */
+  .work__metric {
+    border-left: 1px solid var(--line);
+    padding-left: clamp(16px, 2vw, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .work__metric-value {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 500;
+    color: var(--indigo);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .work__metric-label {
+    color: var(--ink-3);
+  }
+
+  /* メタ（役割・導線） */
+  .work__meta {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-top: clamp(24px, 3vw, 36px);
+    padding-left: calc(90px + clamp(24px, 4vw, 56px));
+    padding-top: 24px;
+    border-top: 1px dashed var(--line-soft);
+  }
+  .work__meta-item {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .work__meta-item dd {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-2);
+    letter-spacing: 0.04em;
+  }
+  .work__meta-item--link {
+    margin-left: auto;
+  }
+
+  @media (max-width: 880px) {
+    .work__row {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .work__index {
+      flex-direction: row;
+      gap: 16px;
+      padding-top: 0;
+    }
+    .work__metric {
+      border-left: none;
+      border-top: 1px solid var(--line);
+      padding-left: 0;
+      padding-top: 20px;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .work__meta {
+      padding-left: 0;
+    }
+    .work__meta-item--link {
+      margin-left: 0;
+      width: 100%;
+    }
+  }
+</style>

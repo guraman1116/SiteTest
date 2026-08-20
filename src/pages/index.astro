@@ -1,0 +1,299 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Constellation from "../components/Constellation.astro";
+import ProgressBar from "../components/ProgressBar.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Works from "../components/Works.astro";
+import Features from "../components/Features.astro";
+import Stats from "../components/Stats.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout>
+  {/* スクロール進捗バー */}
+  <ProgressBar />
+
+  {/* 星座の線画（背景・固定） */}
+  <Constellation />
+
+  {/* ヘッダー */}
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a href="#top" class="header__logo">
+        <span class="header__logo-mark">✦</span>
+        <span class="header__logo-text">COSMIC STUDIO</span>
+      </a>
+
+      <nav class="header__nav" aria-label="グローバルナビゲーション" id="header-nav">
+        <a href="#services">Services</a>
+        <a href="#works">Works</a>
+        <a href="#about">Studio</a>
+        <a href="#contact" class="header__cta">Contact</a>
+      </nav>
+
+      <button class="header__menu" id="menu-btn" aria-label="メニューを開く" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  {/* メイン */}
+  <main>
+    <Hero />
+    <Services />
+    <Works />
+    <Features />
+    <Stats />
+    <About />
+    <Contact />
+  </main>
+
+  <Footer />
+
+  {/* トップへ戻る */}
+  <a href="#top" class="to-top" id="to-top" aria-label="ページトップへ">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+  </a>
+</Layout>
+
+<style>
+  /* ---------- ヘッダー ---------- */
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  .header.is-scrolled {
+    background: rgba(241, 238, 236, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom-color: var(--line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 72px;
+  }
+
+  .header__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--serif);
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-size: 1rem;
+  }
+  .header__logo-mark {
+    color: var(--indigo);
+    font-size: 1.1rem;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  .header__nav a {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-2);
+    transition: color 0.3s;
+  }
+  .header__nav a:not(.header__cta):hover {
+    color: var(--ink);
+  }
+  .header__cta {
+    padding: 9px 22px;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    transition: background 0.3s, color 0.3s, transform 0.3s var(--ease);
+  }
+  .header__cta:hover {
+    background: var(--ink);
+    color: var(--paper);
+    transform: translateY(-2px);
+  }
+
+  /* ハンバーガー（モバイル） */
+  .header__menu {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+  }
+  .header__menu span {
+    display: block;
+    width: 22px;
+    height: 1px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+  }
+  .header__menu[aria-expanded="true"] span:nth-child(1) {
+    transform: translateY(3.5px) rotate(45deg);
+  }
+  .header__menu[aria-expanded="true"] span:nth-child(2) {
+    transform: translateY(-3.5px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .header__menu { display: flex; }
+    .header__nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      top: -100vh;            /* 閉じた状態：確実に画面外（上）へ */
+      flex-direction: column;
+      gap: 0;
+      padding: 0;
+      background: var(--paper);
+      border-bottom: 1px solid var(--line);
+      transition: top 0.4s var(--ease);
+      align-items: stretch;
+      visibility: hidden;     /* 念のためクリックも無効化 */
+    }
+    .header__nav.is-open {
+      top: 72px;              /* 開いた状態：ヘッダー直下に降りてくる */
+      visibility: visible;
+    }
+    .header__nav a {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .header__cta {
+      margin: 16px 24px;
+      text-align: center;
+    }
+  }
+
+  /* ---------- トップへ戻る ---------- */
+  .to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    z-index: 90;
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: opacity 0.4s var(--ease), transform 0.4s var(--ease),
+      background 0.3s, color 0.3s;
+  }
+  .to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  .to-top:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  @media (max-width: 640px) {
+    .to-top { bottom: 18px; right: 18px; }
+  }
+</style>
+
+<script>
+  import Lenis from "lenis";
+
+  // ---------- Lenis（滑らかなスクロール）----------
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let lenis: Lenis | null = null;
+
+  if (!reduceMotion) {
+    lenis = new Lenis({
+      duration: 1.1,
+      easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+    // Constellation と ProgressBar が参照できるよう公開
+    (window as any).__lenis = lenis;
+
+    const raf = (time: number) => {
+      lenis!.raf(time);
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+  }
+
+  // ---------- スムーススクロール（アンカー）----------
+  // ヘッダーの高さを考慮してオフセット
+  const anchorOffset = 72;
+  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      const id = a.getAttribute("href");
+      if (!id || id === "#") return;
+      const target = document.querySelector(id);
+      if (!target) return;
+      e.preventDefault();
+      const top =
+        (target as HTMLElement).getBoundingClientRect().top +
+        window.scrollY -
+        anchorOffset;
+      if (lenis) {
+        lenis.scrollTo(top, { duration: 1.2 });
+      } else {
+        window.scrollTo({ top, behavior: reduceMotion ? "auto" : "smooth" });
+      }
+    });
+  });
+
+  // ---------- スクロール演出（reveal） ----------
+  const revealEls = document.querySelectorAll(".reveal");
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: "0px 0px -50px 0px" }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+
+  // ---------- ヘッダー ----------
+  const header = document.getElementById("header");
+  const toTop = document.getElementById("to-top");
+  const onScroll = () => {
+    const y = window.scrollY;
+    header?.classList.toggle("is-scrolled", y > 20);
+    toTop?.classList.toggle("is-visible", y > 600);
+  };
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  // ---------- モバイルメニュー ----------
+  const menuBtn = document.getElementById("menu-btn");
+  const nav = document.getElementById("header-nav");
+  menuBtn?.addEventListener("click", () => {
+    const open = menuBtn.getAttribute("aria-expanded") === "true";
+    menuBtn.setAttribute("aria-expanded", String(!open));
+    nav?.classList.toggle("is-open", !open);
+  });
+  nav?.querySelectorAll("a").forEach((a) => {
+    a.addEventListener("click", () => {
+      menuBtn?.setAttribute("aria-expanded", "false");
+      nav.classList.remove("is-open");
+    });
+  });
+</script>
